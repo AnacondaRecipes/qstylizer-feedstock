@@ -25,11 +25,14 @@ requirements:
     - tinycss2 >=1.1.0,<2.0
     - inflection >0.3.0,<1.0
 
-
 test:
   imports:
     - qstylizer
     - qstylizer.style
+  require:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/blambright/qstylizer
