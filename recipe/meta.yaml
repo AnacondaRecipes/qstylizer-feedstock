@@ -12,6 +12,7 @@ source:
 build:
   number: 0
   skip: true  # [s390x]
+  #Inflection is not available for s390x platform. https://anaconda.org/main/inflection
 
 requirements:
   host:
