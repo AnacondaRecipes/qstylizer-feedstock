@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   skip: true  # [s390x]
-  #Building this as a new dependency for spyder , which we don’t support on linux-ppc64le or linux-s390x. Therefore we’re skipping those platforms for this build.
+  # inflection is not available for s390x. qstylizer is built as a new dependency for spyder, which we don’t support on linux-s390x. Therefore we’re skipping this platform for this build.
   skip: true  # [py<37]
 requirements:
   host:
