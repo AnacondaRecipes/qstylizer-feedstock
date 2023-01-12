@@ -30,7 +30,7 @@ test:
   imports:
     - qstylizer
     - qstylizer.style
-  require:
+  requires:
     - pip
   commands:
     - pip check
