@@ -12,17 +12,17 @@ source:
 build:
   number: 0
   skip: true  # [s390x]
-  #Inflection is not available for s390x platform. https://anaconda.org/main/inflection
-
+  #Building this as a new dependency for spyder , which we don’t support on linux-ppc64le or linux-s390x. Therefore we’re skipping those platforms for this build.
+  skip: true  # [py<37]
 requirements:
   host:
-    - python >=3.6
+    - python
     - pip
     - pbr
     - setuptools
     - wheel
   run:
-    - python >=3.6
+    - python
     - tinycss2 >=1.1.0,<2.0
     - inflection >0.3.0,<1.0
 
