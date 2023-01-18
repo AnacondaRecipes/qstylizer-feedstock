@@ -1,5 +1,5 @@
 {% set name = "qstylizer" %}
-{% set version = "0.1.10" %}
+{% set version = "0.2.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,27 +7,33 @@ package:
 
 source:
   url: https://github.com/blambright/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: a5d561ef757d1751766674fba977e339cb4028b057a350969224403f286c4751
+  sha256: 95f7666929cc34efbbd9e0640a13f507b8ec35ec34a9604017cf96c24f7f9ea6
 
 build:
-  noarch: python
   number: 0
-
+  skip: true  # [s390x]
+  # inflection is not available for s390x. qstylizer is built as a new dependency for spyder, which we don’t support on linux-s390x. Therefore we’re skipping this platform for this build.
+  skip: true  # [py<37]
 requirements:
   host:
-    - python >=3.6
+    - python
     - pip
     - pbr
+    - setuptools
+    - wheel
   run:
-    - python >=3.6
-    - tinycss >=0.4,<1.0
+    - python
+    - tinycss2 >=1.1.0,<2.0
     - inflection >0.3.0,<1.0
-
 
 test:
   imports:
     - qstylizer
     - qstylizer.style
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/blambright/qstylizer
@@ -38,7 +44,7 @@ about:
   description: |
     qstylizer is a python package designed to help with the construction of
     PyQt/PySide stylesheets.
-  doc_url: http://qstylizer.readthedocs.io
+  doc_url: https://qstylizer.readthedocs.io
   dev_url: https://github.com/blambright/qstylizer
 
 extra:
