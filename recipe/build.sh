@@ -7,4 +7,4 @@ $PYTHON setup.py bdist_wheel
 cd dist/
 
 # Install wheel manually
-$PYTHON -m pip install *.whl
+$PYTHON -m pip install  --no-deps --no-build-isolation *.whl
