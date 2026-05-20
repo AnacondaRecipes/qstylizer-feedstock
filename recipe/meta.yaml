@@ -1,39 +1,42 @@
 {% set name = "qstylizer" %}
-{% set version = "0.2.2" %}
+{% set version = "0.2.4" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://github.com/blambright/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 95f7666929cc34efbbd9e0640a13f507b8ec35ec34a9604017cf96c24f7f9ea6
+  sha256: 5ad15eeafdb140af3711531a1468382e3a15d8a416e5b1bcc6bf28693a7c37ee
 
 build:
   number: 0
-  skip: true  # [s390x]
-  # inflection is not available for s390x. qstylizer is built as a new dependency for spyder, which we don’t support on linux-s390x. Therefore we’re skipping this platform for this build.
-  skip: true  # [py<37]
+
 requirements:
   host:
     - python
     - pip
     - pbr
-    - setuptools
+    - setuptools <82
     - wheel
   run:
     - python
-    - tinycss2 >=1.1.0,<2.0
-    - inflection >0.3.0,<1.0
+    - tinycss2 >=0.5,<2
+    - inflection >0.3.0,<1
 
 test:
+  source_files:
+    - test
   imports:
     - qstylizer
     - qstylizer.style
-  requires:
-    - pip
   commands:
     - pip check
+    - pytest -v test
+  requires:
+    - pip
+    - pytest
+    - pytest-mock
 
 about:
   home: https://github.com/blambright/qstylizer
